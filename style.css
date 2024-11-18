@@ -1,0 +1,18 @@
+.board {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin: 30px auto;
+  background-color: rgb(86, 183, 86);
+}
+.snake {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: purple;
+  top: 200px;
+  left: 300px;
+}
+.button-axis {
+  text-align: center;
+}
