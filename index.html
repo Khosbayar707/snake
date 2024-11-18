@@ -7,15 +7,13 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="board"></div>
-    <div class="snake"></div>
+    <div class="board" id="board"></div>
     <div class="button-axis">
-      <button>up</button>
-      <button>down</button>
-      <button>left</button>
-      <button>right</button>
+      <button onclick="changeDirection('up');">up</button>
+      <button onclick="changeDirection('down');">down</button>
+      <button onclick="changeDirection('left');">left</button>
+      <button onclick="changeDirection('right');">right</button>
     </div>
-
-    <script src="app.js"></script>
+    <script src="/app.js"></script>
   </body>
 </html>
