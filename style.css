@@ -1,7 +1,7 @@
 .board {
   position: relative;
   margin: 30px auto;
-  background-color: rgb(86, 183, 86);
+  background-color: black;
 }
 .snake {
   position: absolute;
@@ -9,5 +9,8 @@
   border-radius: 10px;
 }
 .button-axis {
+  text-align: center;
+}
+.options {
   text-align: center;
 }

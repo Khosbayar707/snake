@@ -1,7 +1,14 @@
 // Хэмжээ өгөх
-let headTop = 10;
-let headLeft = 12;
-let direction = "up";
+let headTop = 5;
+let headLeft = 5;
+let direction = "right";
+
+let tails = [
+  { x: 2, y: 5 },
+  { x: 3, y: 5 },
+  { x: 4, y: 5 },
+];
+let intervalValid = null;
 
 const config = { size: 20, width: 30, height: 20 };
 const boardEl = document.getElementById("board");
@@ -21,6 +28,9 @@ function goUp() {
 
 function goRight() {
   headLeft = headLeft + 1;
+  if (headLeft === config.width) {
+    headLeft = 0;
+  }
   render();
 }
 
@@ -34,7 +44,7 @@ function goDown() {
   render();
 }
 
-// Зүүн тийш
+// Зүүн тийш явуулах
 
 function goLeft() {
   headLeft = headLeft - 1;
@@ -59,9 +69,9 @@ function changeDirection(newDirection) {
 }
 // Хөдөлгөх
 
-setInterval(gameLoop, 300);
-
 function gameLoop() {
+  tails.push({ x: headLeft, y: headTop });
+  tails.shift();
   switch (direction) {
     case "up":
       goUp();
@@ -77,14 +87,73 @@ function gameLoop() {
       break;
   }
 }
+function listenKeys(event) {
+  const key = event.code;
+  switch (key) {
+    case "ArrowUp":
+      changeDirection("up");
+      break;
+    case "ArrowDown":
+      changeDirection("down");
+      break;
+    case "ArrowRight":
+      changeDirection("right");
+      break;
+    case "ArrowLeft":
+      changeDirection("left");
+      break;
+  }
+}
+document.addEventListener("keydown", listenKeys);
+
+document.addEventListener("keydown", listenSpace);
+function listenSpace(event) {
+  if (event.code === "Space") {
+    if (intervalValid) {
+      pauseGame();
+    } else {
+      startGame();
+    }
+  }
+}
+
+function startGame() {
+  if (!intervalValid) {
+    intervalValid = setInterval(gameLoop, 200);
+  }
+  render();
+}
+
+function pauseGame() {
+  clearInterval(intervalValid);
+  intervalValid = null;
+}
+
+function reset() {
+  (headTop = 5), (headLeft = 5);
+}
+
+function restartGame() {
+  headTop = 5;
+  headLeft = 5;
+  tails = [
+    { x: 2, y: 5 },
+    { x: 3, y: 5 },
+    { x: 4, y: 5 },
+  ];
+}
 
 // Могой оруулах
 function render() {
-  const snakeHTML = `<div class="snake" style="width: ${
-    1 * config.size
-  }px; height: ${1 * config.size}px; top: ${headTop * config.size}px; left: ${
-    headLeft * config.size
-  }px"></div>`;
+  console.log({ intervalValid });
+  let tailsHTML = "";
+  for (let i = 0; i < tails.length; i++) {
+    tailsHTML += `<div class="snake" style="width: ${
+      1 * config.size
+    }px; height: ${1 * config.size}px; top: ${
+      tails[i].y * config.size
+    }px; left: ${tails[i].x * config.size}px"></div>`;
+  }
+  let snakeHTML = `${tailsHTML}`;
   boardEl.innerHTML = snakeHTML;
 }
-render();
