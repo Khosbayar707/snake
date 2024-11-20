@@ -1,6 +1,6 @@
 // Хэмжээ өгөх
-let headTop = 5;
-let headLeft = 5;
+let headY = 5;
+let headX = 5;
 
 let foodY;
 let foodX;
@@ -21,9 +21,9 @@ boardEl.style.height = config.height * config.size + "px";
 
 // Дээшээ явуулах
 function goUp() {
-  headTop = headTop - 1;
-  if (headTop < 0) {
-    headTop = config.height - 1;
+  headY = headY - 1;
+  if (headY < 0) {
+    headY = config.height - 1;
   }
   render();
 }
@@ -31,9 +31,9 @@ function goUp() {
 // Баруун тийш явуулах
 
 function goRight() {
-  headLeft = headLeft + 1;
-  if (headLeft === config.width) {
-    headLeft = 0;
+  headX = headX + 1;
+  if (headX === config.width) {
+    headX = 0;
   }
   render();
 }
@@ -41,9 +41,9 @@ function goRight() {
 // Доошоо явуулах
 
 function goDown() {
-  headTop = headTop + 1;
-  if (headTop === config.height) {
-    headTop = 0;
+  headY = headY + 1;
+  if (headY === config.height) {
+    headY = 0;
   }
   render();
 }
@@ -51,9 +51,9 @@ function goDown() {
 // Зүүн тийш явуулах
 
 function goLeft() {
-  headLeft = headLeft - 1;
-  if (headLeft < 0) {
-    headLeft = config.width - 1;
+  headX = headX - 1;
+  if (headX < 0) {
+    headX = config.width - 1;
   }
   render();
 }
@@ -74,8 +74,20 @@ function changeDirection(newDirection) {
 // Хөдөлгөх
 
 function gameLoop() {
-  tails.push({ x: headLeft, y: headTop });
+  tails.push({ x: headX, y: headY });
   tails.shift();
+  for (let i = 0; i < tails.length - 1; i++) {
+    if (headX === tails[i].x && headY === tails[i].y) {
+      alert("Game over");
+      restartGame();
+    }
+  }
+  if (headX === foodX && headY === foodY) {
+    tails.push({ x: headX, y: headY });
+    generateFood();
+    score += 1;
+  }
+
   switch (direction) {
     case "up":
       goUp();
@@ -123,12 +135,14 @@ function listenSpace(event) {
 
 function generateFood() {
   foodX = Math.floor(Math.random() * config.width);
-  foodY = math.floor(Math.random() * config.height);
+  foodY = Math.floor(Math.random() * config.height);
+  return foodX, foodY;
 }
 
 function startGame() {
   if (!intervalValid) {
-    intervalValid = setInterval(gameLoop, 200);
+    intervalValid = setInterval(gameLoop, 100);
+    generateFood();
   }
   render();
 }
@@ -139,12 +153,12 @@ function pauseGame() {
 }
 
 function reset() {
-  (headTop = 5), (headLeft = 5);
+  (headY = 5), (headX = 5);
 }
 
 function restartGame() {
-  headTop = 5;
-  headLeft = 5;
+  headY = 5;
+  headX = 5;
   tails = [
     { x: 2, y: 5 },
     { x: 3, y: 5 },
