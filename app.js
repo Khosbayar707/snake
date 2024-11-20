@@ -1,6 +1,10 @@
 // Хэмжээ өгөх
 let headTop = 5;
 let headLeft = 5;
+
+let foodY;
+let foodX;
+
 let direction = "right";
 
 let tails = [
@@ -117,6 +121,11 @@ function listenSpace(event) {
   }
 }
 
+function generateFood() {
+  foodX = Math.floor(Math.random() * config.width);
+  foodY = math.floor(Math.random() * config.height);
+}
+
 function startGame() {
   if (!intervalValid) {
     intervalValid = setInterval(gameLoop, 200);
@@ -141,19 +150,25 @@ function restartGame() {
     { x: 3, y: 5 },
     { x: 4, y: 5 },
   ];
+  generateFood();
 }
 
 // Могой оруулах
 function render() {
-  console.log({ intervalValid });
   let tailsHTML = "";
+  let foodHTML = "";
   for (let i = 0; i < tails.length; i++) {
     tailsHTML += `<div class="snake" style="width: ${
       1 * config.size
     }px; height: ${1 * config.size}px; top: ${
       tails[i].y * config.size
     }px; left: ${tails[i].x * config.size}px"></div>`;
+    foodHTML += `<div class="food" style="width: ${
+      1 * config.size
+    }px; height: ${1 * config.size}px; top: ${foodY * config.size}px; left: ${
+      foodX * config.size
+    }px"></div>`;
   }
-  let snakeHTML = `${tailsHTML}`;
+  let snakeHTML = `${tailsHTML} ${foodHTML}`;
   boardEl.innerHTML = snakeHTML;
 }
