@@ -23,7 +23,8 @@ boardEl.style.height = config.height * config.size + "px";
 function goUp() {
   headY = headY - 1;
   if (headY < 0) {
-    headY = config.height - 1;
+    alert("You dead");
+    restartGame();
   }
   render();
 }
@@ -33,7 +34,8 @@ function goUp() {
 function goRight() {
   headX = headX + 1;
   if (headX === config.width) {
-    headX = 0;
+    alert("You dead");
+    restartGame();
   }
   render();
 }
@@ -43,7 +45,8 @@ function goRight() {
 function goDown() {
   headY = headY + 1;
   if (headY === config.height) {
-    headY = 0;
+    alert("You dead");
+    restartGame();
   }
   render();
 }
@@ -53,7 +56,8 @@ function goDown() {
 function goLeft() {
   headX = headX - 1;
   if (headX < 0) {
-    headX = config.width - 1;
+    alert("You dead");
+    restartGame();
   }
   render();
 }
@@ -80,12 +84,14 @@ function gameLoop() {
     if (headX === tails[i].x && headY === tails[i].y) {
       alert("Game over");
       restartGame();
+    } else if (headX === tails[i].x && headY === tails[i].y) {
+      alert("Game over");
+      restartGame();
     }
   }
   if (headX === foodX && headY === foodY) {
     tails.push({ x: headX, y: headY });
     generateFood();
-    score += 1;
   }
 
   switch (direction) {

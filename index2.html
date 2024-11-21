@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini shop</title>
+    <style>
+      * {
+        font-family: "Montserrat", sans-serif;
+      }
+      ul {
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        margin: 10px 0;
+        font-size: 1.1em;
+        line-height: 1.6;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+      }
+      li span {
+        display: block;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="productList"></ul>
+  </body>
+  <script>
+    const products = [
+      { name: "Сүү", price: 4000, category: "Хүнс", rating: 4.6 },
+      { name: "Дэвтэр", price: 2000, category: "Бусад", rating: 4.2 },
+      { name: "Чихэр", price: 500, category: "Хүнс", rating: 3.9 },
+      { name: "Ус", price: 1500, category: "Хүнс", rating: 5 },
+      { name: "Шоколад", price: 6000, category: "Хүнс", rating: 4.2 },
+      { name: "Алчуур", price: 2500, category: "Ариун цэвэр", rating: 3.5 },
+      { name: "Ногоо", price: 1500, category: "Хүнс", rating: 4.7 },
+      { name: "Саван", price: 2000, category: "Ариун цэвэр", rating: 3 },
+    ];
+    // Жагсаалтыг үүсгэх үндсэн функц
+    function renderProductList() {
+      const container = document.getElementById("productList");
+      products.map(renderProduct);
+
+      // 1 бүтээгдэхүүн render
+      function renderProduct(product) {
+        const li = document.createElement("li");
+        const discountedPrice = calculateDiscount(product.price);
+        const title = product.name;
+        li.innerHTML = `<h1> ${title} </h1>`;
+      }
+    }
+    // Хямдралын үнэ тооцох функц
+    function calculateDiscount(price) {
+      return price * 0.85;
+    }
+
+    // Үнэлгээнд од нэмэх функц
+    function getStarRating(rating) {
+      if (rating > 4) {
+        return "star";
+      } else {
+        ("");
+      }
+    }
+    // Жагсаалтыг render
+    renderProductList();
+  </script>
+</html>
