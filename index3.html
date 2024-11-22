@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Mini shop</title>
+    <style>
+      * {
+        font-family: "Montserrat", sans-serif;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        margin: 10px 0;
+        font-size: 1.1em;
+        line-height: 1.6;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 10px;
+      }
+      li span {
+        display: block;
+        font-size: 12px;
+      }
+      h3 {
+        margin: 0;
+        font-size: 1.2em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #333;
+      }
+      h3 span {
+        font-size: 1.5em;
+        color: gold;
+      }
+      p {
+        margin: 8px 0;
+        font-size: 0.9em;
+        color: #555;
+      }
+
+      #productList {
+        list-style: none;
+        padding: 0;
+        max-width: 600px;
+        margin: 20px auto;
+      }
+      #productList li {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        padding: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="productList"></ul>
+  </body>
+  <script>
+    const products = [
+      { name: "Сүү", price: 4000, category: "Хүнс", rating: 4.6 },
+      { name: "Дэвтэр", price: 2000, category: "Бусад", rating: 4.2 },
+      { name: "Чихэр", price: 500, category: "Хүнс", rating: 3.9 },
+      { name: "Ус", price: 1500, category: "Хүнс", rating: 5 },
+      { name: "Шоколад", price: 6000, category: "Хүнс", rating: 4.2 },
+      { name: "Алчуур", price: 2500, category: "Ариун цэвэр", rating: 3.5 },
+      { name: "Ногоо", price: 1500, category: "Хүнс", rating: 4.7 },
+      { name: "Саван", price: 2000, category: "Ариун цэвэр", rating: 3 },
+    ];
+
+    const container = document.getElementById("productList");
+
+    products.map((product) => {
+      const li = document.createElement("li");
+
+      const productName = document.createElement("h3");
+      productName.innerHTML = `${product.name} ${
+        product.rating >= 4 ? "<span>👍</span>" : ""
+      }`;
+
+      const productDetails = document.createElement("p");
+      productDetails.innerHTML = `
+        <span class="price">Анхны үнэ: ${product.price}₮</span><br>
+        <span class="category">Ангилал: ${product.category}</span><br>
+        <span class="rating">Үнэлгээ: ${product.rating}</span>
+      `;
+
+      li.appendChild(productName);
+      li.appendChild(productDetails);
+
+      productList.appendChild(li);
+    });
+  </script>
+</html>

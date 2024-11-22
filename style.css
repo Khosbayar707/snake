@@ -1,12 +1,15 @@
 .board {
   position: relative;
   margin: 30px auto;
-  background-color: black;
+  background-image: url(/ar_tal.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .snake {
   position: absolute;
   background-color: purple;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 .button-axis {
   text-align: center;
@@ -16,6 +19,8 @@
 }
 .food {
   position: absolute;
-  background-color: rgb(255, 0, 93);
-  border-radius: 30px;
+  background-image: url(/apple.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

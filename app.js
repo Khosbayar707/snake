@@ -1,11 +1,12 @@
 // Хэмжээ өгөх
 let headY = 5;
-let headX = 5;
+let headX = 4;
 
 let foodY;
 let foodX;
 
 let direction = "right";
+let nextDirection = direction;
 
 let tails = [
   { x: 2, y: 5 },
@@ -26,7 +27,6 @@ function goUp() {
     alert("You dead");
     restartGame();
   }
-  render();
 }
 
 // Баруун тийш явуулах
@@ -37,7 +37,6 @@ function goRight() {
     alert("You dead");
     restartGame();
   }
-  render();
 }
 
 // Доошоо явуулах
@@ -48,7 +47,6 @@ function goDown() {
     alert("You dead");
     restartGame();
   }
-  render();
 }
 
 // Зүүн тийш явуулах
@@ -59,25 +57,39 @@ function goLeft() {
     alert("You dead");
     restartGame();
   }
-  render();
 }
 
 // Чиглэлээ өөрлөх товч ажлуулах
 
 function changeDirection(newDirection) {
-  if (direction === "up" || direction === "down") {
+  if (nextDirection === "up" || nextDirection === "down") {
     if (newDirection === "right" || newDirection === "left") {
-      direction = newDirection;
+      nextDirection = newDirection;
     }
-  } else if (direction === "right" || direction === "left") {
+  } else if (nextDirection === "right" || nextDirection === "left") {
     if (newDirection === "up" || newDirection === "down") {
-      direction = newDirection;
+      nextDirection = newDirection;
     }
   }
 }
 // Хөдөлгөх
 
 function gameLoop() {
+  switch (nextDirection) {
+    case "up":
+      goUp();
+      break;
+    case "right":
+      goRight();
+      break;
+    case "down":
+      goDown();
+      break;
+    case "left":
+      goLeft();
+      break;
+  }
+
   tails.push({ x: headX, y: headY });
   tails.shift();
   for (let i = 0; i < tails.length - 1; i++) {
@@ -94,20 +106,7 @@ function gameLoop() {
     generateFood();
   }
 
-  switch (direction) {
-    case "up":
-      goUp();
-      break;
-    case "right":
-      goRight();
-      break;
-    case "down":
-      goDown();
-      break;
-    case "left":
-      goLeft();
-      break;
-  }
+  render();
 }
 function listenKeys(event) {
   const key = event.code;
@@ -170,8 +169,10 @@ function restartGame() {
     { x: 3, y: 5 },
     { x: 4, y: 5 },
   ];
+  nextDirection = "right";
   generateFood();
 }
+function resumeGame() {}
 
 // Могой оруулах
 function render() {
